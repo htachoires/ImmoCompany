@@ -1,5 +1,6 @@
 using ImmoCompany.Banks;
 using ImmoCompany.Domain;
+using ImmoCompany.Domain.Moneys;
 using ImmoCompany.Emails;
 
 namespace ImmoCompany.Tests.Unit.OfferOrchestrator;
@@ -23,8 +24,15 @@ public class OfferOrchestratorTests
 
         var sut = new ImmoCompany.OfferOrchestrator.OfferOrchestrator(bankService, emailService);
 
+        var offer = new Offer
+        {
+            Building = ABuilding.Build(),
+            Buyer = ABuyer.Build(),
+            Amount = Money.EUR(10_000)
+        };
+
         //Act
-        var completeOfferResult = sut.AcceptOffer(AnOffer.Build(), AnOwner.Build());
+        var completeOfferResult = sut.AcceptOffer(offer, AnOwner.Build());
 
         //Assert
         Assert.Equal(CompleteOfferResult.TransactionStatus.Completed, completeOfferResult.BankOfferResult.Status);

@@ -1,4 +1,5 @@
 using ImmoCompany.Banks;
+using ImmoCompany.Domain;
 using ImmoCompany.Domain.Moneys;
 
 namespace ImmoCompany.Tests.Unit.Banks;
@@ -14,11 +15,12 @@ public class BankTests
 
         var owner = AnOwner.WithCurrentBalance(Money.EUR(0));
 
-        var offer = AnOffer
-            .WithAmount(offerAmount)
-            .ForBuilding(ABuilding.OwnedBy(owner))
-            .By(ABuyer.WithCurrentBalance(buyerAmount))
-            .Build();
+        var offer = new Offer
+        {
+            Building = ABuilding.OwnedBy(owner).Build(),
+            Buyer = ABuyer.WithCurrentBalance(buyerAmount).Build(),
+            Amount = offerAmount
+        };
 
         var sut = new BankService(); //sut => system under test
 
