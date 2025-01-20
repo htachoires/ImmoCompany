@@ -4,5 +4,8 @@ namespace ImmoCompany.Emails;
 
 public interface IEmailService
 {
-    EmailResult SendEmail(IPerson person, string content);
+    EmailResult SendOfferCompletedToNewOwner(Offer offer);
+    EmailResult SendOfferCompletedToOldOwner(IPerson person, Offer offer);
+    EmailResult SendOfferCanceledToOwner(IPerson person, Offer offer);
+    EmailResult SendOfferCanceledToBuyer(Offer offer);
 }

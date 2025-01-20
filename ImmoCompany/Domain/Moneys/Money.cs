@@ -19,6 +19,8 @@ public class Money
     {
         return new Money { Quantity = quantity, Devise = Devise.EUR };
     }
+    
+    private Money() { }
 
     public static bool operator ==(Money obj1, Money obj2)
     {
